@@ -1,0 +1,25 @@
+# make services php-fpm available and mysql
+version: '3.7'
+
+services:
+  mysql:
+    image: mysql:8.0
+    volumes:
+      - ../mysql:/var/lib/mysql
+    ports:
+      - "33067:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=laravel
+
+  laravel: 
+    build: "."
+    container_name: laravel
+    volumes:
+      - .:/var/www/html
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    restart: always
+
