@@ -26,13 +26,12 @@ ENV PATH /usr/local/bin:$PATH
 
 WORKDIR /var/www/html
 
-COPY composer.json .
+COPY . .
 
 COPY .env.example .env
 
 RUN composer install
 
-COPY . .
 
 EXPOSE 8000
 
